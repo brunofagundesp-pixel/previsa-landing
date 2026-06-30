@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "landing",
+      "public": "dist/previsa-landing",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

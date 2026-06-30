@@ -1,0 +1,218 @@
+<header class="header">
+  <div class="header-inner">
+    <span class="logo">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
+        <rect x="2" y="4" width="4" height="16" rx="1" fill="#1f5cc2"></rect>
+        <rect x="10" y="8" width="4" height="12" rx="1" fill="#1f5cc2"></rect>
+        <rect x="18" y="2" width="4" height="20" rx="1" fill="#1f5cc2"></rect>
+      </svg>
+      Previsa
+    </span>
+  </div>
+</header>
+
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <span class="hero-badge">BETA FECHADO</span>
+      <h1 class="hero-title">
+        Saiba quanto dinheiro<br>
+        voc&ecirc; ter&aacute;<br>
+        <span class="hero-highlight">em qualquer dia do m&ecirc;s.</span>
+      </h1>
+      <p class="hero-text">Veja quanto dinheiro você terá nos próximos dias antes mesmo de gastar.<br>Planeje seu mês com mais segurança.</p>
+      <button class="hero-cta" (click)="scrollTo('funcionalidades')">Ver como funciona</button>
+      <div class="social-proof">
+        <span class="social-proof-dot"></span>
+        <span class="social-proof-text"><strong>Apenas 20 participantes</strong> ser&atilde;o selecionados</span>
+      </div>
+      <div class="float-card">
+        <div class="float-card-header">Saldo Previsto</div>
+        <div class="float-card-body">
+          <div class="float-card-row">
+            <span>Hoje</span>
+            <span class="float-card-value">R$ 2.430</span>
+          </div>
+          <div class="float-card-row">
+            <span>15 Jul</span>
+            <span class="float-card-value">R$ 1.920</span>
+          </div>
+          <div class="float-card-row">
+            <span>30 Jul</span>
+            <span class="float-card-value">R$ 4.180</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-card" *ngIf="!submitted; else successTpl">
+        <h2 class="card-title">Participe do Beta Fechado</h2>
+        <p class="card-text">Estamos selecionando os primeiros usu&aacute;rios para testar o Previsa antes do lan&ccedil;amento oficial.<br>Cadastre-se abaixo para solicitar seu acesso antecipado.</p>
+
+        <form class="card-form" (ngSubmit)="submit()" #betaForm="ngForm">
+          <label class="field">
+            <span>Nome completo</span>
+            <input type="text" [(ngModel)]="form.name" name="name" placeholder="Seu nome" required />
+          </label>
+
+          <label class="field">
+            <span>Email</span>
+            <input type="email" [(ngModel)]="form.email" name="email" placeholder="seu@email.com" required />
+          </label>
+
+          <label class="field-checkbox">
+            <input type="checkbox" [(ngModel)]="form.agreed" name="agreed" />
+            <span>Concordo em participar do Beta Fechado e receber comunicações sobre o Previsa.</span>
+          </label>
+
+          <p class="form-error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+          <button class="submit-btn" type="submit" [disabled]="submitting">
+            {{ submitting ? 'Enviando…' : 'Solicitar meu acesso' }}
+          </button>
+          <p class="form-trust">🔒 Seus dados ser&atilde;o utilizados apenas para comunica&ccedil;&atilde;o relacionada ao Beta do Previsa.</p>
+        </form>
+      </div>
+
+      <ng-template #successTpl>
+        <div class="hero-card hero-card--success">
+          <span class="material-icons success-icon">check_circle</span>
+          <h2 class="card-title">Cadastro realizado!</h2>
+          <p class="card-text">Em breve entraremos em contato caso você seja selecionado para participar do Beta.</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</section>
+
+<section class="section section--gray" id="screenshot">
+  <div class="section-inner">
+    <h2 class="section-title">Veja o Previsa em a&ccedil;&atilde;o</h2>
+    <div class="mockup">
+      <img src="assets/previsa-desktop.png" alt="Screenshot do sistema Previsa" class="mockup-img" />
+    </div>
+    <p class="mockup-text">Acompanhe seu saldo futuro em tempo real. Tudo o que voc&ecirc; precisa para visualizar seu futuro financeiro em um &uacute;nico lugar.</p>
+  </div>
+</section>
+
+<section class="section" id="funcionalidades">
+  <div class="section-inner">
+    <h2 class="section-title">Planeje antes de gastar.</h2>
+    <div class="features-grid">
+      <article class="feature-card">
+        <span class="material-icons feature-icon">calendar_today</span>
+        <h3>Previs&atilde;o di&aacute;ria</h3>
+        <p>Veja o saldo esperado para qualquer dia do m&ecirc;s.</p>
+        <ul class="feature-sublist">
+          <li>Alertas de saldo negativo antes de acontecer</li>
+          <li>Calend&aacute;rio financeiro interativo</li>
+        </ul>
+      </article>
+      <article class="feature-card">
+        <span class="material-icons feature-icon">account_balance_wallet</span>
+        <h3>Entradas e sa&iacute;das</h3>
+        <p>Controle receitas e despesas em poucos segundos.</p>
+        <ul class="feature-sublist">
+          <li>Categoriza&ccedil;&atilde;o autom&aacute;tica de gastos</li>
+          <li>Relat&oacute;rios por per&iacute;odo</li>
+        </ul>
+      </article>
+      <article class="feature-card">
+        <span class="material-icons feature-icon">credit_card</span>
+        <h3>Cart&otilde;es de cr&eacute;dito</h3>
+        <p>Gerencie os gastos dos seus cart&otilde;es de cr&eacute;dito.</p>
+        <ul class="feature-sublist">
+          <li>Acompanhe faturas e vencimentos</li>
+          <li>Notifica&ccedil;&atilde;o antes de fechar a fatura</li>
+        </ul>
+      </article>
+      <article class="feature-card">
+        <span class="material-icons feature-icon">track_changes</span>
+        <h3>Metas financeiras</h3>
+        <p>Acompanhe seus objetivos e evolu&ccedil;&atilde;o.</p>
+        <ul class="feature-sublist">
+          <li>Notifica&ccedil;&otilde;es ao atingir marcos</li>
+          <li>Gr&aacute;fico de progresso visual</li>
+        </ul>
+      </article>
+      <article class="feature-card">
+        <span class="material-icons feature-icon">trending_up</span>
+        <h3>Saldo futuro</h3>
+        <p>Saiba exatamente quanto dinheiro sobrar&aacute;.</p>
+        <ul class="feature-sublist">
+          <li>Simule cen&aacute;rios antes de assumir compromissos</li>
+          <li>Proje&ccedil;&atilde;o para at&eacute; 12 meses</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section--gray" id="como-funciona">
+  <div class="section-inner">
+    <h2 class="section-title">Como funciona</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Cadastre suas receitas</h3>
+        <p>Adicione salário, freelas e outras entradas.</p>
+      </div>
+      <div class="step-arrow">↓</div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Organize suas despesas</h3>
+        <p>Registre contas, assinaturas e gastos do dia a dia.</p>
+      </div>
+      <div class="step-arrow">↓</div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Veja a previsão automaticamente</h3>
+        <p>O sistema calcula seu saldo futuro em tempo real.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section section--gray" id="faq">
+  <div class="section-inner section-inner--narrow">
+    <h2 class="section-title">Perguntas frequentes</h2>
+    <div class="faq-list">
+      <div class="faq-item" *ngFor="let faq of faqs; let i = index" [class.faq-item--open]="activeFaq === i">
+        <button class="faq-question" (click)="toggleFaq(i)">
+          <span>{{ faq.q }}</span>
+          <span class="faq-chevron">{{ activeFaq === i ? '−' : '+' }}</span>
+        </button>
+        <div class="faq-answer" *ngIf="activeFaq === i">
+          <p>{{ faq.a }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+    <span class="logo">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
+        <rect x="2" y="4" width="4" height="16" rx="1" fill="#1f5cc2"></rect>
+        <rect x="10" y="8" width="4" height="12" rx="1" fill="#1f5cc2"></rect>
+        <rect x="18" y="2" width="4" height="20" rx="1" fill="#1f5cc2"></rect>
+      </svg>
+      Previsa
+    </span>
+      <p class="footer-copy">© 2026 Previsa.</p>
+    </div>
+    <div class="footer-links">
+      <a href="#">Política de Privacidade</a>
+      <a href="#">Termos de Uso</a>
+      <a href="#">Contato</a>
+    </div>
+  </div>
+</footer>
+
+<button class="scroll-top" *ngIf="showScrollTop" (click)="scrollToTop()" aria-label="Voltar ao topo">↑</button>
