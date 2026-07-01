@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore';
 
 export interface BetaApplicant {
   name: string;
@@ -13,8 +13,10 @@ export interface BetaApplicant {
 
 @Injectable({ providedIn: 'root' })
 export class BetaService {
+  constructor(private firestore: AngularFirestore) {}
+
   async apply(data: { name: string; email: string; phone?: string }): Promise<void> {
-    const db = firebase.firestore();
+    const db = this.firestore.firestore;
     const counterRef = db.collection('counters').doc('betaCount');
 
     await db.runTransaction(async (transaction) => {
