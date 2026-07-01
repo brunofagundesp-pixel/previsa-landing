@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
 
 export interface BetaApplicant {
   name: string;
@@ -8,17 +8,29 @@ export interface BetaApplicant {
   email: string;
   createdAt: firebase.firestore.FieldValue;
   status: 'pending';
+  registrationNumber: number;
 }
 
 @Injectable({ providedIn: 'root' })
 export class BetaService {
-  constructor(private firestore: AngularFirestore) {}
-
   async apply(data: { name: string; email: string; phone?: string }): Promise<void> {
-    await this.firestore.collection('betaApplicants').add({
-      ...data,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      status: 'pending'
+    const db = firebase.firestore();
+    const counterRef = db.collection('counters').doc('betaCount');
+
+    await db.runTransaction(async (transaction) => {
+      const counterDoc = await transaction.get(counterRef);
+      const currentCount = counterDoc.exists ? counterDoc.data()!['count'] : 0;
+      const newCount = currentCount + 1;
+
+      transaction.set(counterRef, { count: newCount });
+      transaction.set(db.collection('betaApplicants').doc(), {
+        name: data.name,
+        email: data.email,
+        ...(data.phone ? { phone: data.phone } : {}),
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        status: 'pending',
+        registrationNumber: newCount
+      });
     });
   }
 }
